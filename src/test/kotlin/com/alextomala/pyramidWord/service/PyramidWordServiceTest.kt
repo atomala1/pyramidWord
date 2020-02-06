@@ -18,6 +18,11 @@ class PyramidWordServiceTest {
     }
 
     @Test
+    fun `Pyramid Word - Start at 2 instead of 1`() {
+        assertTrue(service.isPyramidWord("bdbdcdcdc"))
+    }
+
+    @Test
     fun `Pyramid Word - Out Of Order`() {
         assertTrue(service.isPyramidWord("cccabbdddd"))
     }
@@ -30,6 +35,11 @@ class PyramidWordServiceTest {
     @Test
     fun `Non-pyramid Word`() {
         assertFalse(service.isPyramidWord("bandana"))
+    }
+
+    @Test
+    fun `Non-pyramid Word - Gaps exist`() {
+        assertFalse(service.isPyramidWord("cciiiihhhhhh"))
     }
 
     @Test

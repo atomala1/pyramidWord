@@ -1,7 +1,6 @@
 package com.alextomala.pyramidWord.service
 
 import org.springframework.stereotype.Service
-import java.util.stream.IntStream.range
 
 @Service
 class PyramidWordService {
@@ -11,6 +10,7 @@ class PyramidWordService {
 
         val charArray = word.toLowerCase().toCharArray().toList()
 
+        // Get a sequence of frequency of letters, like [1, 2, 3]
         val countOfLetters = charArray
                 .groupingBy { it }
                 .eachCount()
@@ -18,11 +18,12 @@ class PyramidWordService {
                 .sorted()
                 .toList()
 
+        // See if there are any duplicates.
         return if (countOfLetters != countOfLetters.distinct()) {
             false
         } else {
-            range(countOfLetters.first(), countOfLetters.last())
-                    .allMatch { countOfLetters.contains(it) }
+            // If there are no duplicates, find out if there are any gaps.
+            (countOfLetters.last() - countOfLetters.first() + 1) == countOfLetters.size
         }
     }
 
